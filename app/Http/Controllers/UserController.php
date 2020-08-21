@@ -18,7 +18,7 @@ class UserController extends Controller
        return response()->json($user);
     }
 
-    public function changestate($state)
+    public function status($state)
     {
         $user = DB::table('users')->select("id","status","name","email","created_at","updated_at")->where("status",$state)->paginate(25);
         return response()->json($user);
@@ -31,6 +31,12 @@ class UserController extends Controller
         ->orWhere('email', 'LIKE', '%'.$text.'%')
         ->select("id","status","name","email","created_at","updated_at")
         ->paginate(25);
+        return response()->json($user);
+    }
+
+    public function changestate($id,$state)
+    {
+        $user = DB::table('users')->where('id', $id)->update(['status' => $state]);
         return response()->json($user);
     }
 

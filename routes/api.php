@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(["prefix"=>"user"],function(){
     Route::get("/all","UserController@index");
-    Route::get("/status/{state}","UserController@changestate");
+    Route::get("/status/{state}","UserController@status");
     Route::get("/search/{text}","UserController@search");
+    Route::get("/changestate/{id}/{state}","UserController@changestate");
 });
